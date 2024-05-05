@@ -41,16 +41,15 @@ def main(job: JobContext):
 
 
 
-def searchlight():
+def searchlight(job: jobcontext):
 
     # Loading brain mask
-    brain_mask_nii = nib.load('/Users/mortezamahdiani/Documents/ian_projects/Courtois/dist/data/brainmask.nii.gz')
-    brain_mask_data = brain_mask_nii.get_fdata()
+    brain_mask_data = job.data['mask_data']
 
     # Loading searchlight centers
-    centers_linear = np.load('/Users/mortezamahdiani/Documents/ian_projects/Courtois/dist/data/subj04_searchlight_func1pt8mm_centers.npy')
+    centers_linear = job.data['centers']
     centers = np.array(np.unravel_index(centers_linear, brain_mask_data.shape)).T
-    rdms = np.load('/Users/mortezamahdiani/Documents/ian_projects/Courtois/dist/data/subj04_searchlight_func1pt8mm_rdms.npy')
+    rdms = job.data['rdms']
     volume = np.zeros(brain_mask_data.shape)
 
     for center, rdm in zip(centers, rdms):
@@ -59,10 +58,10 @@ def searchlight():
 
     # Create a new NIfTI image from the volume
     volume_nii = nib.Nifti1Image(volume, brain_mask_nii.affine, brain_mask_nii.header)
-    nib.save(volume_nii, '/Users/mortezamahdiani/Documents/ian_projects/Courtois/dist/images/rdm_measure.nii.gz')
+    nib.save(volume_nii, '/Users/mortezamahdiani/Documents/ian_projects/Courtois/dist/images/rdm_measure_job.nii.gz')
 
 
-def visualize(path='/Users/mortezamahdiani/Documents/ian_projects/Courtois/dist/images/rdm_measure.nii.gz'):
+def visualize(path='/Users/mortezamahdiani/Documents/ian_projects/Courtois/dist/images/rdm_measure_job.nii.gz'):
 
     nii = nib.load(path)
     plotting.plot_stat_map(nii, colorbar=True, cmap='jet')
@@ -74,10 +73,8 @@ def visualize(path='/Users/mortezamahdiani/Documents/ian_projects/Courtois/dist/
 #     visualize('rdm_measure.nii.gz')
 
 def main(job: JobContext):
-    script_path = os.path.abspath(__file__)
-    print("Script location:", script_path)
-    searchlight()
-    image_path = '/Users/mortezamahdiani/Documents/ian_projects/Courtois/dist/images/rdm_measure.nii.gz'
+    searchlight(job)
+    image_path = '/Users/mortezamahdiani/Documents/ian_projects/Courtois/dist/images/rdm_measure_job.nii.gz'
     visualize(image_path)
 
     # fpath = job.outputPath.joinpath(f'{pnick}.png')
