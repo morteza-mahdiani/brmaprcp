@@ -64,7 +64,7 @@ def searchlight(job: jobcontext):
         nib.save(volume_nii, '/Users/mortezamahdiani/Documents/ian_projects/Courtois/dist/images/rdm_measure_job.nii.gz')
 
 
-def visualize_and_save_png(path='/Users/mortezamahdiani/Documents/ian_projects/Courtois/dist/images/rdm_measure_job.nii.gz', output_path='/Users/mortezamahdiani/Documents/ian_projects/Courtois/dist/images/visualization.png'):
+def visualize(path='/Users/mortezamahdiani/Documents/ian_projects/Courtois/dist/images/rdm_measure_job.nii.gz', output_path='/Users/mortezamahdiani/Documents/ian_projects/Courtois/dist/images/visualization.png'):
     nii = nib.load(path)
     display = plotting.plot_stat_map(nii, colorbar=True, cmap='jet', output_file=output_path)
     display.savefig(output_path)
