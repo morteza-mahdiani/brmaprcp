@@ -66,9 +66,7 @@ def searchlight(job: jobcontext):
 
 def visualize(path='/Users/mortezamahdiani/Documents/ian_projects/Courtois/dist/images/rdm_measure_job.nii.gz', output_path='/Users/mortezamahdiani/Documents/ian_projects/Courtois/dist/images/visualization.png'):
     nii = nib.load(path)
-    display = plotting.plot_stat_map(nii, colorbar=True, cmap='jet', output_file=output_path)
-    display.savefig(output_path)
-    display.close()
+    plotting.plot_stat_map(nii, colorbar=True, cmap='jet', output_file=output_path)
     print("Image saved as:", output_path)
 
 
@@ -79,7 +77,8 @@ def visualize(path='/Users/mortezamahdiani/Documents/ian_projects/Courtois/dist/
 def main(job: JobContext):
     searchlight(job)
     image_path = '/Users/mortezamahdiani/Documents/ian_projects/Courtois/dist/images/rdm_measure_job.nii.gz'
-    visualize(image_path)
+    output_path='/Users/mortezamahdiani/Documents/ian_projects/Courtois/dist/images/visualization.png'
+    visualize(path=image_path, output_path=output_path)
 
     # fpath = job.outputPath.joinpath(f'{pnick}.png')
     # job.addFile(fpath)
