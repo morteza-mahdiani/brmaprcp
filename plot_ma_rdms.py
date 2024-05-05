@@ -7,8 +7,8 @@ from matplotlib import pyplot
 if TYPE_CHECKING:
     from jobcontext import JobContext
 import numpy as np
-import nibabel as nib
-from nilearn import plotting
+# import nibabel as nib
+# from nilearn import plotting
 
 def main(job: JobContext):
     print('you are here and this is doen!')
@@ -40,32 +40,32 @@ def main(job: JobContext):
 
 
 
-def searchlight():
+# def searchlight():
 
-    # Loading brain mask
-    brain_mask_nii = nib.load('./data/brainmask.nii.gz')
-    brain_mask_data = brain_mask_nii.get_fdata()
+#     # Loading brain mask
+#     brain_mask_nii = nib.load('./data/brainmask.nii.gz')
+#     brain_mask_data = brain_mask_nii.get_fdata()
 
-    # Loading searchlight centers
-    centers_linear = np.load('./data/subj04_searchlight_func1pt8mm_centers.npy')
-    centers = np.array(np.unravel_index(centers_linear, brain_mask_data.shape)).T
-    rdms = np.load('./data/subj04_searchlight_func1pt8mm_rdms.npy')
-    volume = np.zeros(brain_mask_data.shape)
+#     # Loading searchlight centers
+#     centers_linear = np.load('./data/subj04_searchlight_func1pt8mm_centers.npy')
+#     centers = np.array(np.unravel_index(centers_linear, brain_mask_data.shape)).T
+#     rdms = np.load('./data/subj04_searchlight_func1pt8mm_rdms.npy')
+#     volume = np.zeros(brain_mask_data.shape)
 
-    for center, rdm in zip(centers, rdms):
-        measure = np.mean(rdm)
-        volume[tuple(center)] = measure
+#     for center, rdm in zip(centers, rdms):
+#         measure = np.mean(rdm)
+#         volume[tuple(center)] = measure
 
-    # Create a new NIfTI image from the volume
-    volume_nii = nib.Nifti1Image(volume, brain_mask_nii.affine, brain_mask_nii.header)
-    nib.save(volume_nii, 'rdm_measure.nii.gz')
+#     # Create a new NIfTI image from the volume
+#     volume_nii = nib.Nifti1Image(volume, brain_mask_nii.affine, brain_mask_nii.header)
+#     nib.save(volume_nii, 'rdm_measure.nii.gz')
 
 
-def visualize(path='rdm_measure.nii.gz'):
+# def visualize(path='rdm_measure.nii.gz'):
 
-    nii = nib.load(path)
-    plotting.plot_stat_map(nii, colorbar=True, cmap='jet')
-    plotting.show()
+#     nii = nib.load(path)
+#     plotting.plot_stat_map(nii, colorbar=True, cmap='jet')
+#     plotting.show()
 
 
 # if __name__ == '__main__':
