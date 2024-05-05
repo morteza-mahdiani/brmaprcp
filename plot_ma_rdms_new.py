@@ -73,6 +73,8 @@ def visualize(path='./dist/images/rdm_measure.nii.gz'):
 #     visualize('rdm_measure.nii.gz')
 
 def main(job: JobContext):
+    script_path = os.path.abspath(__file__)
+    print("Script location:", script_path)
     searchlight()
     image_path = './dist/images/rdm_measure.nii.gz'
     visualize(image_path)
