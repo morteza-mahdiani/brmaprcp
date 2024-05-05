@@ -43,25 +43,24 @@ def main(job: JobContext):
 
 def searchlight(job: jobcontext):
 
-    print(job)
-    print(job.data.items())
+    for (pnick, pdata) in job.data.items():
 
-    # Loading brain mask
-    brain_mask_data = job.data['mask_data']
+        # Loading brain mask
+        brain_mask_data = pdata['mask_data']
 
-    # Loading searchlight centers
-    centers_linear = job.data['centers']
-    centers = np.array(np.unravel_index(centers_linear, brain_mask_data.shape)).T
-    rdms = job.data['rdms']
-    volume = np.zeros(brain_mask_data.shape)
+        # Loading searchlight centers
+        centers_linear = pdata['centers']
+        centers = np.array(np.unravel_index(centers_linear, brain_mask_data.shape)).T
+        rdms = pdata['rdms']
+        volume = np.zeros(brain_mask_data.shape)
 
-    for center, rdm in zip(centers, rdms):
-        measure = np.mean(rdm)
-        volume[tuple(center)] = measure
+        for center, rdm in zip(centers, rdms):
+            measure = np.mean(rdm)
+            volume[tuple(center)] = measure
 
-    # Create a new NIfTI image from the volume
-    volume_nii = nib.Nifti1Image(volume, brain_mask_nii.affine, brain_mask_nii.header)
-    nib.save(volume_nii, '/Users/mortezamahdiani/Documents/ian_projects/Courtois/dist/images/rdm_measure_job.nii.gz')
+        # Create a new NIfTI image from the volume
+        volume_nii = nib.Nifti1Image(volume, brain_mask_nii.affine, brain_mask_nii.header)
+        nib.save(volume_nii, '/Users/mortezamahdiani/Documents/ian_projects/Courtois/dist/images/rdm_measure_job.nii.gz')
 
 
 def visualize(path='/Users/mortezamahdiani/Documents/ian_projects/Courtois/dist/images/rdm_measure_job.nii.gz'):
