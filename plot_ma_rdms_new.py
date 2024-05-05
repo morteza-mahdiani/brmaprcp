@@ -43,6 +43,9 @@ def main(job: JobContext):
 
 def searchlight(job: jobcontext):
 
+    print(job)
+    print(job.data.items())
+
     # Loading brain mask
     brain_mask_data = job.data['mask_data']
 
