@@ -1,1 +1,14 @@
 version: 2.1
+jobs:
+  test:
+    docker:
+      - image: circleci/python:3.11
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: pip install -r requirements.txt
+workflows:
+  example:
+    jobs:
+      - test
