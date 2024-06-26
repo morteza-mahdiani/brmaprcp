@@ -1,4 +1,4 @@
-"""Volumetric map 6:49
+"""Volumetric map 6:57
 """
 
 from __future__ import annotations
@@ -228,14 +228,14 @@ def main(job: JobContext):
         # Create a new NIfTI image from the volume
         volume_nii = nib.Nifti1Image(volume, brain_mask_nii.affine, brain_mask_nii.header)
 
-        result_path = job.outputPath.joinpath(f'{model_name}/subj4new')
+        result_path = job.outputPath.joinpath(f'{model_name}/sub04')
         try:
             os.makedirs(result_path)
         except OSError as e:
             print(f"Creation of the directory {result_path} failed")
         else:
             print(f"Successfully created the directory {result_path}")
-        output_path = job.outputPath.joinpath(f'{model_name}/subj4new/rdm2_measure_layer_{idx}.nii.gz')
+        output_path = job.outputPath.joinpath(f'{model_name}/sub04/rdm_layer_{rdm_file}.nii.gz')
         job.files.append(output_path)
 
         nib.save(volume_nii, output_path)
