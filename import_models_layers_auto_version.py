@@ -53,7 +53,7 @@ def main(job: JobContext):
 
     # use eval mode for feeding the model
     model.eval()
-    layers = job.data['Layer'].split('/')[-1]
+    layers = job.data['layer'].split('/')[-1]
 
     # defining wrapper for hooking activations
     model_wrapped = Inspect(model, layer=layers, keep_output=False)
