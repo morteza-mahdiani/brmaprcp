@@ -1,4 +1,4 @@
-"""Volumetric map 5:36
+"""Volumetric map 5:55
 """
 
 from __future__ import annotations
@@ -53,7 +53,7 @@ def main(job: JobContext):
 
     # use eval mode for feeding the model
     model.eval()
-    layers = job.data['layer'].split('/')[-1]
+    layers = job.data['layer']['key']
 
     # defining wrapper for hooking activations
     model_wrapped = Inspect(model, layer=layers, keep_output=False)
