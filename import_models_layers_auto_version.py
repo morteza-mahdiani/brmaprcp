@@ -1,4 +1,4 @@
-"""Volumetric map 6:57
+"""Volumetric map
 """
 
 from __future__ import annotations
@@ -240,19 +240,3 @@ def main(job: JobContext):
 
         nib.save(volume_nii, output_path)
 
-    # needs to be integrated in worker script (#imp)
-
-    # current_time = datetime.utcnow()
-    # layer_ingredients = []
-    #
-    # for layer in layers:
-    #     layer_ingredients.append(dict(
-    #         kind='neuro',
-    #         source='local',
-    #         owners=[],
-    #         path=f'/local/v1',
-    #         title='NSD100 fMRI RDMs',
-    #         created=current_time,
-    #     ))
-    # count = ingredients.add(layer_ingredients)
-    # print(f'Added {count} model layers ingredients')
