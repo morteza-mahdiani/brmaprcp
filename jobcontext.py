@@ -1,5 +1,6 @@
-"""Design-time interface for the JobContext
-"""
+"""Title:Design-time interface for the JobContext"""
+"""ingredients: model, stims, neuro"""
+
 from __future__ import annotations
 from pathlib import Path
 from typing import Dict, List, Optional

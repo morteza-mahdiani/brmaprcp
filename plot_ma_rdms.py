@@ -1,5 +1,6 @@
-"""Plot RDM for Multiple Arrangements tasks modified v1
-"""
+"""Title:Plot RDM for Multiple Arrangements tasks modified v1"""
+"""ingredients: model, stims, neuro"""
+
 from __future__ import annotations
 from typing import TYPE_CHECKING
 import rsatoolbox, numpy
